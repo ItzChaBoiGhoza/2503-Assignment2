@@ -1,7 +1,3 @@
-package assignment2;
-
-import java.util.Comparator;
-
 public class Avenger implements Comparable <Avenger>{
 
 	//Initialize variables

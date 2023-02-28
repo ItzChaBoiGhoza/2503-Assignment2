@@ -1,5 +1,3 @@
-package assignment2;
-
 import java.util.Comparator;
 
 public class SLL<T extends Comparable<T>> {
