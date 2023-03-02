@@ -2,17 +2,20 @@ import java.util.Comparator;
 
 public class SLL<T extends Comparable<T>> {
 
-	private Node<T> head;
+	private Node<T> head,tail;
+	private int size;
 	private Comparator<T> comparator;
 
 	public SLL() {
-		this.head = null;
-		this.comparator = null;
+		head = null;
+		size = 0;
+		comparator = null;
 	}
 	
 	public SLL(Comparator<T> externalComp)  {
-		this.head = null;
-		this.comparator = externalComp;
+		head = null;
+		size = 0;
+		comparator = externalComp;
 	}
 	
 	// Public Methods
@@ -58,27 +61,67 @@ public class SLL<T extends Comparable<T>> {
 		return null;
 		
 	}
-
-	public void addInOrder(T n) {
-		Node<T> newNode = new Node<>(n);
-		if(head == null) {
-			head = newNode;
-			return;
-		}
-		
-		if(compare(n, head.getData()) <= 0) {
-			newNode.setNext(head);
-			head = newNode;
-			return;
-		}
-		
+	
+	public void printList() {
 		Node<T> currentNode = head;
-		while(currentNode.getNext() != null && compare(n, currentNode.getNext().getData()) > 0) {
+		while (currentNode != null) {
+			// Visit the node. In this case, print it out.
+			System.out.println(currentNode.getData().toString());
 			currentNode = currentNode.getNext();
 		}
-		newNode.setNext(currentNode.getNext());
-		currentNode.setNext(newNode);
-		
+	}
+
+	
+	public int size() {
+		return size;
+	}
+	
+	public void addHead(T n) {
+		Node<T> newNode = new Node<>(n);
+		if(head == null) {
+			head = tail = newNode;
+		} else {
+			newNode.setNext(head);
+			head = newNode;
+		}
+	}
+	
+	public void addTail(T n) {
+		Node<T> newNode = new Node<>(n);
+		if (tail == null) { 
+			head = newNode;
+			tail = newNode;
+		} else {
+			tail.setNext(newNode);
+			tail = newNode;
+		}
+	}
+
+	public void addInOrder(T n) {
+			Node<T> newNode = new Node<>(n);
+			if(head == null) {
+				head = newNode;
+				return;
+			}
+			
+			if(compare(n, head.getData()) <= 0) {
+				newNode.setNext(head);
+				head = newNode;
+				return;
+			}
+			
+			Node<T> currentNode = head;
+			while(currentNode.getNext() != null && compare(n, currentNode.getNext().getData()) > 0) {
+				currentNode = currentNode.getNext();
+			}
+			newNode.setNext(currentNode.getNext());
+			currentNode.setNext(newNode);
+	
+	}
+	
+	public void emptyList() {
+		head = null;
+		tail = null;
 	}
 
 	private int compare(T a1, T a2) {
@@ -87,5 +130,4 @@ public class SLL<T extends Comparable<T>> {
 		else
 			return comparator.compare(a1, a2);
 	}
-
 }

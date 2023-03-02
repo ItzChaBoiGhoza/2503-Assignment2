@@ -22,7 +22,7 @@ public class A2 {
 	private int topN = 4;
 	private int totalwordcount = 0;
 //	private Scanner input = new Scanner(System.in);
-	//private SLL<Avenger> mentionList = new SLL<Avenger>();
+	private SLL<Avenger> mentionList = new SLL<Avenger>();
 	//private SLL<Avenger> alphabticalList = new SLL<Avenger>();
 	//private SLL<Avenger> mostPopularList = new SLL<Avenger>(new AvengerComparatorFreqDesc());
 	//private SLL<Avenger> leastPopularList = new SLL<Avenger>(new AvengerComparatorFreqAsc());
@@ -41,7 +41,8 @@ public class A2 {
 	private void createdOrderedLists() {
 		// TODO: 
 		// Create a mover and traverse through the mentionList.
-		// Add each avenger to the other three lists. 
+		// Add each avenger to the other three lists.
+		
 	}
 
 	/**
@@ -72,12 +73,16 @@ public class A2 {
 				for(int i = 0; i < avengerRoster.length; i++) {
 					if(word.equals(avengerRoster[i][0]) || word.equals(avengerRoster[i][1])) {
 						Avenger avenger = new Avenger(avengerRoster[i][0], avengerRoster[i][1]);
+						if(!mentionList.equals(avenger)) {
+							mentionList.addInOrder(avenger);;
+						}
 //						if(avengersArrayList.contains(avenger)) {
 //							avengersArrayList.get(avengersArrayList.indexOf(avenger)).addFrequency();
 //						} else {
 //							avenger.addFrequency();
-//							avengersArrayList.add(avenger);
+//							avengersArrayList.add(avenger); 	
 //						}
+						mentionList.addTail(avenger);
 					}
 				}
 			}
@@ -110,6 +115,7 @@ public class A2 {
 		System.out.println("All avengers in the order they appeared in the input stream:");
 		// Todo: Print the list of avengers in the order they appeared in the input
 		// Make sure you follow the formatting example in the sample output
+		mentionList.printList();
 
 		System.out.println();
 		
