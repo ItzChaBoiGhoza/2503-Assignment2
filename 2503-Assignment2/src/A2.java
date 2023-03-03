@@ -23,9 +23,9 @@ public class A2 {
 	private int totalwordcount = 0;
 //	private Scanner input = new Scanner(System.in);
 	private SLL<Avenger> mentionList = new SLL<Avenger>();
-	//private SLL<Avenger> alphabticalList = new SLL<Avenger>();
-	//private SLL<Avenger> mostPopularList = new SLL<Avenger>(new AvengerComparatorFreqDesc());
-	//private SLL<Avenger> leastPopularList = new SLL<Avenger>(new AvengerComparatorFreqAsc());
+	private SLL<Avenger> alphabticalList = new SLL<Avenger>();
+//	private SLL<Avenger> mostPopularList = new SLL<Avenger>(new AvengerComparatorFreqDesc());
+//	private SLL<Avenger> leastPopularList = new SLL<Avenger>(new AvengerComparatorFreqAsc());
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		A2 a2 = new A2();
@@ -52,10 +52,10 @@ public class A2 {
 			alphabticalList.addInOrder(avenger);
 
 			// Add to most popular list
-			mostPopularList.addInOrder(avenger);
+//			mostPopularList.addInOrder(avenger);
 
 			// Add to least popular list
-			leastPopularList.addInOrder(avenger);
+//			leastPopularList.addInOrder(avenger);
 
 			mover = mover.getNext();
 		}
@@ -68,7 +68,7 @@ public class A2 {
 	 * @throws FileNotFoundException 
 	 */
 	private void readInput() throws FileNotFoundException {
-		File file = new File("./input4.txt");
+		File file = new File("./input1.txt");
 		Scanner fileReader = new Scanner(file);
 		
 		/*
@@ -147,6 +147,7 @@ public class A2 {
 
 		System.out.println("All mentioned avengers in alphabetical order:");
 		// Todo: Print the list of avengers in alphabetical order
+		alphabticalList.printList();
 		
 		System.out.println();
 	}

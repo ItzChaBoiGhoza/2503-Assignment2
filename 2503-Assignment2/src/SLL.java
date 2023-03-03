@@ -44,11 +44,8 @@ public class SLL<T extends Comparable<T>> {
 	}
 	
 	public Node<T> findItem(T n) {
-		
 		Node<T> currentNode = head;
-		
 		while(currentNode != null) {
-			
 			if (currentNode.getData().equals(n))
 				return currentNode;
 			else
