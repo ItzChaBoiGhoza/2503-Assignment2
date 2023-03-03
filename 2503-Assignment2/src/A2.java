@@ -57,7 +57,7 @@ public class A2 {
 			// Add to least popular list
 //			leastPopularList.addInOrder(avenger);
 
-			mover = mover.getNext();
+
 		}
 		
 	}
