@@ -86,6 +86,10 @@ public class SLL<T extends Comparable<T>> {
 		}
 	}
 	
+	public Node<T> getHead() {
+		return head;
+	}
+	
 	public void addTail(T n) {
 		Node<T> newNode = new Node<>(n);
 		if (tail == null) { 
