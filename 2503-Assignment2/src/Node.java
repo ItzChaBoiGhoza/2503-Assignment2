@@ -7,8 +7,8 @@ public class Node <T extends Comparable<T>> {
 	 * Constructor for objects of class Node
 	 */
 	public Node(T d) {
-		this.data = d;
-		this.next = null;
+		data = d;
+		next = null;
 	}
 
 	public T getData() {
@@ -26,5 +26,4 @@ public class Node <T extends Comparable<T>> {
 	public void setNext(Node<T> n) {
 		next = n;
 	}
-
 }

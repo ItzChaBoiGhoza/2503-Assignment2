@@ -51,7 +51,7 @@ public class A2 {
 	 * @throws FileNotFoundException 
 	 */
 	private void readInput() throws FileNotFoundException {
-		File file = new File("./input1.txt");
+		File file = new File("./input4.txt");
 		Scanner fileReader = new Scanner(file);
 		
 		/*
@@ -73,16 +73,12 @@ public class A2 {
 				for(int i = 0; i < avengerRoster.length; i++) {
 					if(word.equals(avengerRoster[i][0]) || word.equals(avengerRoster[i][1])) {
 						Avenger avenger = new Avenger(avengerRoster[i][0], avengerRoster[i][1]);
-						if(!mentionList.equals(avenger)) {
-							mentionList.addInOrder(avenger);;
+						if(mentionList.findItem(avenger) != null) {
+							mentionList.findItem(avenger).getData().addFrequency();
+						} else {
+							avenger.addFrequency();
+							mentionList.addTail(avenger);
 						}
-//						if(avengersArrayList.contains(avenger)) {
-//							avengersArrayList.get(avengersArrayList.indexOf(avenger)).addFrequency();
-//						} else {
-//							avenger.addFrequency();
-//							avengersArrayList.add(avenger); 	
-//						}
-						mentionList.addTail(avenger);
 					}
 				}
 			}
@@ -116,6 +112,7 @@ public class A2 {
 		// Todo: Print the list of avengers in the order they appeared in the input
 		// Make sure you follow the formatting example in the sample output
 		mentionList.printList();
+		
 
 		System.out.println();
 		

@@ -18,14 +18,10 @@ public class SLL<T extends Comparable<T>> {
 		comparator = externalComp;
 	}
 	
-	// Public Methods
-
-	/**
-	 * Return the number of elements in the list.
-	 * 
-	 * @return int number of elements in the list.
-	 */
-
+	public int size() {
+		return size;
+	}
+	
 	public void deleteItem(T data) {
 		 if(head == null) {
 			 return;
@@ -47,33 +43,26 @@ public class SLL<T extends Comparable<T>> {
 
 	}
 	
-	public Node<T> findItem(T key) {
+	public Node<T> findItem(T n) {
 		
 		Node<T> currentNode = head;
 		
 		while(currentNode != null) {
 			
-			if (currentNode.getData().equals(key))
+			if (currentNode.getData().equals(n))
 				return currentNode;
 			else
 				currentNode = currentNode.getNext();
 		}
 		return null;
-		
 	}
 	
 	public void printList() {
 		Node<T> currentNode = head;
 		while (currentNode != null) {
-			// Visit the node. In this case, print it out.
 			System.out.println(currentNode.getData().toString());
 			currentNode = currentNode.getNext();
 		}
-	}
-
-	
-	public int size() {
-		return size;
 	}
 	
 	public void addHead(T n) {
