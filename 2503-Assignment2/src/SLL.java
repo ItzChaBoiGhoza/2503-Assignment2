@@ -22,26 +22,30 @@ public class SLL<T extends Comparable<T>> {
 		return size;
 	}
 	
-	public void deleteItem(T data) {
-		 if(head == null) {
-			 return;
-		 }
-		 
-		 if(head.getData().equals(data)) {
-			 head = head.getNext();
-			 return;
-		 } 
-		 Node<T> current = head;
-		 while(current.getNext() != null) {
-			 if(current.getNext().getData().equals(data)) {
-				 current.setNext(current.getNext().getNext());
-				 return;
-			 }
-			 
-			 current = current.getNext();
-		 }
-
+	private Node<T> delete(T key) {
+		Node<T> mover = head;
+		return null;
 	}
+//	public void deleteItem(T data) {
+//		 if(head == null) {
+//			 return;
+//		 }
+//		 
+//		 if(head.getData().equals(data)) {
+//			 head = head.getNext();
+//			 return;
+//		 } 
+//		 Node<T> current = head;
+//		 while(current.getNext() != null) {
+//			 if(current.getNext().getData().equals(data)) {
+//				 current.setNext(current.getNext().getNext());
+//				 return;
+//			 }
+//			 
+//			 current = current.getNext();
+//		 }
+//
+//	}
 	
 	public Node<T> findItem(T n) {
 		Node<T> currentNode = head;
@@ -88,12 +92,16 @@ public class SLL<T extends Comparable<T>> {
 	}
 
 	public void addInOrder(T n) {
-			Node<T> newNode = new Node<>(n);
-			if(head == null) {
-				head = newNode;
-				return;
+		Node<T> newNode= new Node<>(n);
+		if (head == null || compare(n, head.getData()) <= 0) {
+			addHead(n);
+		} else if (compare(n, tail.getData()) > 0) {
+			addTail(n);
+		} else {
+			Node<T> mover = head;
+			while(mover.getNext() != null && compare(n,mover.getNext().getData())> 0) {
+				mover = mover.getNext();
 			}
-			
 			if(compare(n, head.getData()) <= 0) {
 				newNode.setNext(head);
 				head = newNode;
@@ -106,7 +114,32 @@ public class SLL<T extends Comparable<T>> {
 			}
 			newNode.setNext(currentNode.getNext());
 			currentNode.setNext(newNode);
+			newNode.setNext(mover.getNext());
+			mover.setNext(newNode);
+		}
 	}
+	
+//	public void addInOrder(T n) {
+//			Node<T> newNode = new Node<>(n);
+//			if(head == null) {
+//				head = newNode;
+//				return;
+//			}
+//			
+//			if(compare(n, head.getData()) <= 0) {
+//				newNode.setNext(head);
+//				head = newNode;
+//				return;
+//			}
+//			
+//			Node<T> currentNode = head;
+//			while(currentNode.getNext() != null && compare(n, currentNode.getNext().getData()) > 0) {
+//				currentNode = currentNode.getNext();
+//			}
+//			newNode.setNext(currentNode.getNext());
+//			currentNode.setNext(newNode);
+//	
+//	}
 	
 	public void emptyList() {
 		head = null;
