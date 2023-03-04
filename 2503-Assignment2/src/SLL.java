@@ -106,7 +106,6 @@ public class SLL<T extends Comparable<T>> {
 			}
 			newNode.setNext(currentNode.getNext());
 			currentNode.setNext(newNode);
-	
 	}
 	
 	public void emptyList() {

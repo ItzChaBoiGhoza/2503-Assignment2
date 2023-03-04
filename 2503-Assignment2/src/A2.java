@@ -24,8 +24,8 @@ public class A2 {
 //	private Scanner input = new Scanner(System.in);
 	private SLL<Avenger> mentionList = new SLL<Avenger>();
 	private SLL<Avenger> alphabticalList = new SLL<Avenger>();
-//	private SLL<Avenger> mostPopularList = new SLL<Avenger>(new AvengerComparatorFreqDesc());
-//	private SLL<Avenger> leastPopularList = new SLL<Avenger>(new AvengerComparatorFreqAsc());
+	private SLL<Avenger> mostPopularList = new SLL<Avenger>(new AvengerComparatorFreqDescending());
+	private SLL<Avenger> leastPopularList = new SLL<Avenger>(new AvengerComparatorFreqAscending());
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		A2 a2 = new A2();
@@ -45,18 +45,12 @@ public class A2 {
 		Node<Avenger> mover = mentionList.getHead();
 		while (mover != null) {
 			Avenger avenger = mover.getData();
-
-			mover = mover.getNext();
-
 			// Add to alphabetical list
 			alphabticalList.addInOrder(avenger);
-
 			// Add to most popular list
-//			mostPopularList.addInOrder(avenger);
-
+			mostPopularList.addInOrder(avenger);
 			// Add to least popular list
-//			leastPopularList.addInOrder(avenger);
-
+			leastPopularList.addInOrder(avenger);
 			mover = mover.getNext();
 		}
 		
@@ -90,11 +84,11 @@ public class A2 {
 				for(int i = 0; i < avengerRoster.length; i++) {
 					if(word.equals(avengerRoster[i][0]) || word.equals(avengerRoster[i][1])) {
 						Avenger avenger = new Avenger(avengerRoster[i][0], avengerRoster[i][1]);
-						if(mentionList.findItem(avenger) != null) {
-							mentionList.findItem(avenger).getData().addFrequency();
-						} else {
+						if(mentionList.findItem(avenger) == null) {
 							avenger.addFrequency();
 							mentionList.addTail(avenger);
+						} else {
+							mentionList.findItem(avenger).getData().addFrequency();
 						}
 					}
 				}
@@ -128,20 +122,19 @@ public class A2 {
 		System.out.println("All avengers in the order they appeared in the input stream:");
 		// Todo: Print the list of avengers in the order they appeared in the input
 		// Make sure you follow the formatting example in the sample output
-		mentionList.printList();
+		mentionList.printList();	
 		
-
 		System.out.println();
 		
 		System.out.println("Top " + topN + " most popular avengers:");
 		// Todo: Print the most popular avengers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
-		
 		System.out.println();
 
 		System.out.println("Top " + topN + " least popular avengers:");
 		// Todo: Print the least popular avengers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
+		
 		
 		System.out.println();
 
