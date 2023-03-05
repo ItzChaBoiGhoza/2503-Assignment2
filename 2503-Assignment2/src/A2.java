@@ -35,6 +35,7 @@ public class A2 {
 	public void run() throws FileNotFoundException {
 		readInput();
 		createdOrderedLists();
+		
 		printResults();
 	}
 
@@ -62,7 +63,7 @@ public class A2 {
 	 * @throws FileNotFoundException 
 	 */
 	private void readInput() throws FileNotFoundException {
-		File file = new File("./input1.txt");
+		File file = new File("./input3.txt");
 		Scanner fileReader = new Scanner(file);
 		
 		/*
@@ -75,6 +76,14 @@ public class A2 {
 				- if this avenger has already been mentioned, increase the frequency count for the object already in the list.
 				- if this avenger has not been mentioned before, add the newly created avenger to the end of the list, remember to set the frequency.
 		*/ 
+		if(!fileReader.hasNext()) {
+			System.out.println("*----------------------------------------*");
+			System.out.println();
+			System.out.println("input file is empty, try a different input");
+			System.out.println();
+			System.out.println("*----------------------------------------*");
+			System.out.println();
+		}
 		while (fileReader.hasNext()) {
 
 			String word = cleanWord(fileReader.next());
@@ -92,8 +101,9 @@ public class A2 {
 						}
 					}
 				}
-			}
+			} 
 		}
+		fileReader.close();
 	}
 	
 	private String cleanWord(String next) {
@@ -116,7 +126,7 @@ public class A2 {
 	 */
 	private void printResults() {
 		System.out.println("Total number of words: " + totalwordcount);
-		//System.out.println("Number of Avengers Mentioned: " + ??);
+		System.out.println("Number of Avengers Mentioned: " + mentionList.size());
 		System.out.println();
 
 		System.out.println("All avengers in the order they appeared in the input stream:");
@@ -129,19 +139,25 @@ public class A2 {
 		System.out.println("Top " + topN + " most popular avengers:");
 		// Todo: Print the most popular avengers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
+		topPrintList(mostPopularList.size(), mostPopularList.getHead(), topN);
 		System.out.println();
 
 		System.out.println("Top " + topN + " least popular avengers:");
 		// Todo: Print the least popular avengers, see the instructions for tie breaking
 		// Make sure you follow the formatting example in the sample output
-		
-		
+		topPrintList(leastPopularList.size(), leastPopularList.getHead(), topN);
 		System.out.println();
 
 		System.out.println("All mentioned avengers in alphabetical order:");
 		// Todo: Print the list of avengers in alphabetical order
 		alphabticalList.printList();
-		
 		System.out.println();
+	}
+
+	public void topPrintList(int size, Node<Avenger> lList , int n) { 
+		for(int i = 0; i < n && i < size; i++) {
+			System.out.println(lList.getData());
+			lList = lList.getNext();
+		}
 	}
 }

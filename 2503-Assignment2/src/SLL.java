@@ -19,7 +19,12 @@ public class SLL<T extends Comparable<T>> {
 	}
 	
 	public int size() {
-		return size;
+		Node<T> temp = head;
+        while (temp != null) {
+            temp = temp.getNext();
+            size++;
+        }
+        return size;
 	}
 	
 	public void deleteItem(T data) {
@@ -102,7 +107,7 @@ public class SLL<T extends Comparable<T>> {
 //			Node<T> currentNode = head;
 //			while(currentNode.getNext() != null && compare(n, currentNode.getNext().getData()) > 0) {
 //				currentNode = currentNode.getNext();
-//			}
+//			} 
 //			newNode.setNext(currentNode.getNext());
 //			currentNode.setNext(newNode);
 //			newNode.setNext(mover.getNext());

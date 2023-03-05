@@ -26,4 +26,8 @@ public class Node <T extends Comparable<T>> {
 	public void setNext(Node<T> n) {
 		next = n;
 	}
+
+	public int size() {
+		return 0;
+	}
 }
