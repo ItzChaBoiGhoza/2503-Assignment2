@@ -1,15 +1,14 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /** 
- * COMP 2503 Winter 2020 Assignment 2 
+ * COMP 2503 Winter 2023 Assignment 2 
  * 
  * This program must read a input stream and keeps track of the 
  * frequency at which an avenger is mentioned either by name or alias.
  *
- * @author Maryam Elahi
- * @date Fall 2020
+ * @author Shamil Baig, Denzel Pascual, Ghoza Ghazali
+ * @date February 6, 2023
 */
 
 public class A2 {
@@ -19,9 +18,16 @@ public class A2 {
 			{ "hawkeye", "barton" }, { "warmachine", "rhodes" }, { "spiderman", "parker" },
 			{ "wintersoldier", "barnes" } };
 
+	/*
+	 *Initialize variable
+	 */
 	private int topN = 4;
 	private int totalwordcount = 0;
-//	private Scanner input = new Scanner(System.in);
+	private Scanner input = new Scanner(System.in);
+	
+	/*
+	 * Initialize linked list
+	 */
 	private SLL<Avenger> mentionList = new SLL<Avenger>();
 	private SLL<Avenger> alphabticalList = new SLL<Avenger>();
 	private SLL<Avenger> mostPopularList = new SLL<Avenger>(new AvengerComparatorFreqDescending());
@@ -35,10 +41,12 @@ public class A2 {
 	public void run() throws FileNotFoundException {
 		readInput();
 		createdOrderedLists();
-		
 		printResults();
 	}
 
+	/**
+	 * Method to traverse through the linked list of mentionList and add it to the other three linked lists
+	 */
 	private void createdOrderedLists() {
 		// TODO: 
 		// Create a mover and traverse through the mentionList.
@@ -63,10 +71,8 @@ public class A2 {
 	 * @throws FileNotFoundException 
 	 */
 	private void readInput() throws FileNotFoundException {
-		File file = new File("./input3.txt");
-		Scanner fileReader = new Scanner(file);
-		
 		/*
+		Error catching, if the input is empty prompt the user with error message.
 		In a loop, while the scanner object has not reached end of stream,
 		 	- read a word.
 		 	- clean up the word
@@ -76,7 +82,7 @@ public class A2 {
 				- if this avenger has already been mentioned, increase the frequency count for the object already in the list.
 				- if this avenger has not been mentioned before, add the newly created avenger to the end of the list, remember to set the frequency.
 		*/ 
-		if(!fileReader.hasNext()) {
+		if(!input.hasNext()) {
 			System.out.println("*----------------------------------------*");
 			System.out.println();
 			System.out.println("input file is empty, try a different input");
@@ -84,9 +90,9 @@ public class A2 {
 			System.out.println("*----------------------------------------*");
 			System.out.println();
 		}
-		while (fileReader.hasNext()) {
+		while (input.hasNext()) {
 
-			String word = cleanWord(fileReader.next());
+			String word = cleanWord(input.next());
 
 			if (word.length() > 0) {
 				totalwordcount++;
@@ -103,9 +109,14 @@ public class A2 {
 				}
 			} 
 		}
-		fileReader.close();
+		input.close();
 	}
 	
+	/**
+	 * Method to catch only words and turn to lowercase
+	 * @param next
+	 * @return
+	 */
 	private String cleanWord(String next) {
 		// First, if there is an apostrophe, the substring
 		// before the apostrophe is used and the rest is ignored.
@@ -153,7 +164,13 @@ public class A2 {
 		alphabticalList.printList();
 		System.out.println();
 	}
-
+	
+	/**
+	 * Prints out the top most popular and least popular avengers according to the mention size
+	 * @param size
+	 * @param lList
+	 * @param n
+	 */
 	public void topPrintList(int size, Node<Avenger> lList , int n) { 
 		for(int i = 0; i < n && i < size; i++) {
 			System.out.println(lList.getData());
